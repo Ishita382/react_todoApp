@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
@@ -56,29 +56,38 @@ const Delete = styled(Button)`
   display: none;
 `;
 
-class TodoItem extends Component {
-    render() {
+function TodoItem(props){
+  
       return (
-        <CustomizedBox key={this.props.todo.id}>
-          {this.props.todo.isEdit ? null : (
-            <Button onClick={() => this.props.toggle(this.props.todo)}>
-              {this.props.todo.done ? <TickCircle /> : <Circle />}
-            </Button>
-          )}
-          {this.props.todo.isEdit ? (
-            <CustommInput
-              id={this.props.todo.id} type="text" disableUnderline={true} value={this.props.value} onChange={this.props.edit} onKeyPress={this.props.handleEdit}
-            />
-          ) : (
-            <List
-              sx={{textDecoration: this.props.todo.done ? "line-through" : "none", }} onDoubleClick={() => this.props.editInput(this.props.todo)}> {this.props.todo.action}
-            </List>
-          )}
-          {this.props.todo.isEdit ? null : (
-            <Delete className="delete" onClick={() => this.props.delete(this.props.todo)}
-            >
-              <CloseIcon /> </Delete> )}</CustomizedBox>
+        <CustomizedBox>
+        {!props.todo.isEdit && (
+          <Button onClick={() => props.toggle(props.todo)}>
+            {props.todo.done ? <TickCircle /> : <Circle />}
+          </Button>
+        )}
+        {props.todo.isEdit ? (
+          <CustommInput
+            type="text"
+            disableUnderline={true}
+            value={props.value}
+            onChange={props.change}
+            onKeyPress={(e) => props.enter(e, props.todo.id)}
+          />
+        ) : (
+          <List
+            sx={{ textDecoration: props.todo.done ? "line-through" : "none" }}
+            onDoubleClick={() => props.editInput(props.todo)}
+          >
+            {props.todo.action}
+          </List>
+        )}
+        {!props.todo.isEdit && (
+          <Delete className="delete" onClick={() => props.delete(props.todo)}>
+            <CloseIcon />
+          </Delete>
+        )}
+      </CustomizedBox>
       );
-    }
+    
   }
   export default TodoItem;

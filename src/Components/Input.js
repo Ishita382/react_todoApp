@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { styled } from '@mui/system';
 
 
@@ -15,13 +15,14 @@ const CustomInput=styled('input')`
 
 
 
-class Input extends Component{
-  render(){
-  return <CustomInput aria-label="Demo input" placeholder="What needs to be done?" value={this.props.value} 
-  onChange={this.props.click}
-  onKeyPress={this.props.enter} />;
+function Input(props){
+ 
+  return <CustomInput  placeholder="What needs to be done?" value={props.value} 
+  onChange={props.change}
+  onKeyPress={props.enter}
+  disableUnderline = {true} />;
 }
-}
+
 
 
 

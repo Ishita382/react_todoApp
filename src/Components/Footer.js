@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -56,22 +56,22 @@ const CustomizedButton= styled(Button)`
     color: #777;
     `
 
-class Footer extends Component{
+function Footer(props){
     
-    render(){
+    
         return(
             <CustomBox>
-            <Items>{this.props.count("active")} {this.props.count("active")===1?"item":"items"} left</Items>
+            <Items>{props.left} {props.left===1?"item":"items"} left</Items>
             <Buttons>
-            <CustomizedButton onClick={()=>this.props.setMode("all")} >All</CustomizedButton>
-            <CustomizedButton onClick={()=>this.props.setMode("active")} >Active</CustomizedButton>
-            <CustomizedButton onClick={()=>this.props.setMode("completed")} >Completed</CustomizedButton>
+            <CustomizedButton onClick={()=>props.change("all")} >All</CustomizedButton>
+            <CustomizedButton onClick={()=>props.change("active")} >Active</CustomizedButton>
+            <CustomizedButton onClick={()=>props.change("completed")} >Completed</CustomizedButton>
             </Buttons>
-            {this.props.count("completed")?<ClearButton onClick={this.props.clear}>
-                Clear Completed</ClearButton>:null}
+            {props.completed>0 && (<ClearButton onClick={props.clear}>
+                Clear Completed</ClearButton>)}
              </CustomBox>
-        )
-    }
+        );
+    
 }
 
 export default Footer;

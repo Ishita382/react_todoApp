@@ -1,7 +1,8 @@
-import React, {Component} from "react";
+import React from "react";
 import { FaChevronDown } from "react-icons/fa";
 import Button from "@mui/material/Button";
 import { styled } from '@mui/material/styles';
+import Box from "@mui/material/Box";
 
 
 const CustomButton = styled('Button')`
@@ -12,20 +13,20 @@ padding-right: 20px;
 padding-top: 10px;
 font-size: 20px;
 `
-class Arrowbutton extends Component{
-    render(){
+function Arrowbutton(props){
+   
             return (
-                <>
-        {this.props.count("all") ? (
-          <CustomButton onClick={this.props.checkAll}>
+                <Box>
+        {props.countAll ?  (
+          <CustomButton onClick={props.checkAll}>
             <FaChevronDown />
           </CustomButton>
         ) : (
           <CustomButton />
         )}
-      </>
+      </Box>
             );
-      }
+      
     }
 
 
