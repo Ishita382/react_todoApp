@@ -18,22 +18,17 @@ function TodoApp(){
           
        
       const addTodo = useCallback(() => {
-        const newtodo = [
+        const newtodolist = [
           ...all, { id : uuid(), action:newToDo, done:false, isEdit: false},
 
         ];
-        setAll(newtodo);
+        setAll(newtodolist);
         setEditToDo("");
       },[all, newToDo, setEditToDo]);
       
       
      
-    
-      const list = useMemo(()=> [...all].length,[all]);
-    
-      
-    
-      
+  
     
      
       const toggleDone = useCallback( (todo) =>
@@ -46,6 +41,8 @@ function TodoApp(){
       [all]
       );
     
+
+
      
       const deleteTodo = useCallback(
         (todo) => {
@@ -83,7 +80,7 @@ function TodoApp(){
         [all, editToDo]
       );
       
-      
+      const list = useMemo(()=> [...all].length,[all]);
     
     
       const listToMap = useMemo(() => {
